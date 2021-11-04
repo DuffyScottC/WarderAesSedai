@@ -1,4 +1,7 @@
 name: WarderAesSedai
 version: ${project.version}
 main: me.brakpo1nt.warderaessedai.WarderAesSedai
-api-version: 1.17
+api-version: 1.16
+commands:
+  bond:
+    description: Create a Warder and Aes Sedai Bond
