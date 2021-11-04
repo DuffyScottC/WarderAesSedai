@@ -1,0 +1,4 @@
+name: WarderAesSedai
+version: ${project.version}
+main: me.brakpo1nt.warderaessedai.WarderAesSedai
+api-version: 1.17
