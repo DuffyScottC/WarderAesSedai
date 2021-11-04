@@ -1,6 +1,6 @@
 name: WarderAesSedai
 version: ${project.version}
-main: me.brakpo1nt.warderaessedai.WarderAesSedai
+main: me.braekpo1nt.warderaessedai.Main
 api-version: 1.16
 commands:
   bond:
