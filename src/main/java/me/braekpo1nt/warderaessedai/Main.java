@@ -11,7 +11,6 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         new WarderBondCommand(this);
 
-        Bukkit.getLogger().info("listener created");
         new AesSedaiListener(this);
     }
 
