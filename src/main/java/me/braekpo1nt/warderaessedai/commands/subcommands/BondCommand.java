@@ -1,4 +1,4 @@
-package me.braekpo1nt.warderaessedai.commands;
+package me.braekpo1nt.warderaessedai.commands.subcommands;
 
 
 import me.braekpo1nt.warderaessedai.Main;
@@ -13,7 +13,6 @@ public class BondCommand implements SubCommand {
     private Main plugin;
     
     public BondCommand(Main plugin) {
-        plugin.getCommand("bond").setExecutor(this);
         this.plugin = plugin;
     }
 
