@@ -3,5 +3,5 @@ version: ${project.version}
 main: me.braekpo1nt.warderaessedai.Main
 api-version: 1.16
 commands:
-  bond:
-    description: Create a Warder and Aes Sedai Bond
+  wb:
+    description: Warder and Aes Sedai Bond
