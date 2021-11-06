@@ -1,6 +1,6 @@
 package me.braekpo1nt.warderaessedai;
 
-import me.braekpo1nt.warderaessedai.commands.subcommands.BondCommand;
+import me.braekpo1nt.warderaessedai.commands.subcommands.BondSubCommand;
 import me.braekpo1nt.warderaessedai.listeners.AesSedaiListener;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,7 +12,7 @@ public final class Main extends JavaPlugin {
     
     @Override
     public void onEnable() {
-        new BondCommand(this);
+        new BondSubCommand(this);
 
         new AesSedaiListener(this);
     }

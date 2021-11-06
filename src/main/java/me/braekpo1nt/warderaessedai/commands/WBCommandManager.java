@@ -4,7 +4,7 @@ import me.braekpo1nt.warderaessedai.Main;
 import me.braekpo1nt.warderaessedai.commands.interfaces.CommandManager;
 import me.braekpo1nt.warderaessedai.commands.interfaces.SubCommand;
 import me.braekpo1nt.warderaessedai.commands.interfaces.SubTabCommand;
-import me.braekpo1nt.warderaessedai.commands.subcommands.BondCommand;
+import me.braekpo1nt.warderaessedai.commands.subcommands.BondSubCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -20,7 +20,7 @@ public class WBCommandManager implements CommandManager {
     public WBCommandManager(Main plugin) {
         this.plugin = plugin;
         plugin.getCommand("wb").setExecutor(this);
-        subCommands.put("bond", new BondCommand(plugin));
+        subCommands.put("bond", new BondSubCommand(plugin));
     }
 
     /**

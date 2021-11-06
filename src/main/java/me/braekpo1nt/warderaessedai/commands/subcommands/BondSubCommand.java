@@ -8,11 +8,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class BondCommand implements SubCommand {
+public class BondSubCommand implements SubCommand {
     
     private Main plugin;
     
-    public BondCommand(Main plugin) {
+    public BondSubCommand(Main plugin) {
         this.plugin = plugin;
     }
 
