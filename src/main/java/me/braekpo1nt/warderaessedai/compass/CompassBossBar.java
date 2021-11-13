@@ -50,6 +50,7 @@ public class CompassBossBar {
      */
     public void setPlayer(Player player) {
         this.player = player;
+        bossBar.addPlayer(player);
     }
 
     /**

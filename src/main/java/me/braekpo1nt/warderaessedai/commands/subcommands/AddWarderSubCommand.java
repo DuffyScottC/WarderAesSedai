@@ -2,7 +2,9 @@ package me.braekpo1nt.warderaessedai.commands.subcommands;
 
 import me.braekpo1nt.warderaessedai.Main;
 import me.braekpo1nt.warderaessedai.commands.interfaces.SubCommand;
+import me.braekpo1nt.warderaessedai.compass.CompassBossBar;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,8 +15,10 @@ import org.bukkit.entity.Player;
 public class AddWarderSubCommand implements SubCommand {
     
     private Main plugin;
+    private CompassBossBar bar;
     
     public AddWarderSubCommand(Main plugin) {
+        bar = new CompassBossBar(plugin);
         this.plugin = plugin;
     }
     
@@ -32,6 +36,8 @@ public class AddWarderSubCommand implements SubCommand {
         }
         
         plugin.setWarder(warder);
+        bar.setPlayer(warder);
+        bar.setTargetLocation(new Location(warder.getWorld(), 48, 69, -309));
         
         sender.sendMessage(args[0] + " is now a warder.");
         
