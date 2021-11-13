@@ -50,7 +50,7 @@ public class WBCommandManager implements CommandManager {
         
         return subCommands.get(args[0]).onCommand(sender, command, label, Arrays.copyOfRange(args, 1, args.length));
     }
-
+    
     /**
      * Returns a list of this CommandManager's SubCommands for tab completion.
      * @param sender
