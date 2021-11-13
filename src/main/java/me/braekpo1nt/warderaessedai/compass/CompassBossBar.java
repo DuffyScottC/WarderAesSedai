@@ -34,9 +34,10 @@ public class CompassBossBar {
                 if (player == null || targetLocation == null) {
                     return;
                 }
-                bossBar.setTitle(ChatColor.translateAlternateColorCodes('&', "&c" + calculateProgress()));
+                bossBar.setTitle(ChatColor.translateAlternateColorCodes('&', "&c" + String.format("%.2f - %.2f", calculateProgress(), calculateProgress2())));
+                player.sendTitle("","",0,0,0);
             }
-        }, 0, 1/*every tick*/);
+        }, 0, 20/*every tick*/);
     }
     
     /**
@@ -45,8 +46,15 @@ public class CompassBossBar {
      */
     private double calculateProgress() {
         double playerYaw = player.getLocation().getYaw();
-        double targetYaw = targetLocation.getYaw();
+        double targetYaw = targetLocation.clone().subtract(player.getLocation()).getYaw();
         return targetYaw - playerYaw;
+    }
+    
+    private double calculateProgress2() {
+        double targetYaw = targetLocation.clone().subtract(player.getLocation()).getYaw();
+        Bukkit.getLogger().info("targetLocation" + targetLocation);
+        Bukkit.getLogger().info("difference" + targetLocation.clone().subtract(player.getLocation()));
+        return targetYaw;
     }
     
     /**
