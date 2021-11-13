@@ -5,6 +5,7 @@ import me.braekpo1nt.warderaessedai.commands.interfaces.CommandManager;
 import me.braekpo1nt.warderaessedai.commands.interfaces.SubCommand;
 import me.braekpo1nt.warderaessedai.commands.interfaces.SubTabCommand;
 import me.braekpo1nt.warderaessedai.commands.subcommands.AddAesSedaiSubCommand;
+import me.braekpo1nt.warderaessedai.commands.subcommands.AddWarderSubCommand;
 import me.braekpo1nt.warderaessedai.commands.subcommands.BondSubCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -23,6 +24,7 @@ public class WBCommandManager implements CommandManager {
         plugin.getCommand("wb").setExecutor(this);
         subCommands.put("bond", new BondSubCommand(plugin));
         subCommands.put("addaessedai", new AddAesSedaiSubCommand(plugin));
+        subCommands.put("addwarder", new AddWarderSubCommand(plugin));
     }
     
     /**
@@ -48,7 +50,7 @@ public class WBCommandManager implements CommandManager {
         
         return subCommands.get(args[0]).onCommand(sender, command, label, Arrays.copyOfRange(args, 1, args.length));
     }
-
+    
     /**
      * Returns a list of this CommandManager's SubCommands for tab completion.
      * @param sender
