@@ -7,8 +7,11 @@ import org.bukkit.Location;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.boss.KeyedBossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+
+import java.util.Iterator;
 
 /**
  * Indicates a location relative to the player who sees the bar
@@ -21,6 +24,10 @@ public class CompassBossBar {
     private Location targetLocation;
     
     public CompassBossBar(Main plugin) {
+        for (Iterator<KeyedBossBar> it = Bukkit.getBossBars(); it.hasNext(); ) {
+            BossBar bar = it.next();
+            bar.setVisible(false);
+        }
         this.plugin = plugin;
         bossBar = Bukkit.createBossBar("Compass", BarColor.RED, BarStyle.SOLID);
         bossBar.setVisible(true);
