@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
  */
 public class AddAesSedaiSubCommand implements SubCommand {
     
-    private Main plugin;
+    private final Main plugin;
     
     public AddAesSedaiSubCommand(Main plugin) {
         this.plugin = plugin;

@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
  * A temporary debug command used for testing Aes Sedai functionality
  */
 public class AddWarderSubCommand implements SubCommand {
-    
-    private Main plugin;
+
+    private final Main plugin;
     
     public AddWarderSubCommand(Main plugin) {
         this.plugin = plugin;

@@ -6,8 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class AesSedaiListener implements Listener {
-    
-    private Main plugin;
+
+    private final Main plugin;
     
     public AesSedaiListener(Main plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);

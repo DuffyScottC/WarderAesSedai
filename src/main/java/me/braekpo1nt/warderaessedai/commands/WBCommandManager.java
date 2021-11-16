@@ -16,8 +16,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class WBCommandManager implements CommandManager {
-    
-    private Main plugin;
+
+    private final Main plugin;
     
     public WBCommandManager(Main plugin) {
         this.plugin = plugin;
