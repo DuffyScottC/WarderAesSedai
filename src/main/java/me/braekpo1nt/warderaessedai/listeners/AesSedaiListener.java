@@ -1,9 +1,12 @@
 package me.braekpo1nt.warderaessedai.listeners;
 
 import me.braekpo1nt.warderaessedai.Main;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 
 public class AesSedaiListener implements Listener {
 
@@ -17,6 +20,14 @@ public class AesSedaiListener implements Listener {
     @EventHandler
     public void onPlayerDamageEntity(EntityDamageByEntityEvent event) {
         if (event.getDamager().equals(plugin.getAesSedai())) {
+            event.setCancelled(true);
+        }
+    }
+    
+    @EventHandler
+    public void onAesSedaiRegainHealth(EntityRegainHealthEvent event) {
+        if (plugin.getAesSedai().equals(event.getEntity())) {
+            Bukkit.getLogger().info("Cancelled healing");
             event.setCancelled(true);
         }
     }
