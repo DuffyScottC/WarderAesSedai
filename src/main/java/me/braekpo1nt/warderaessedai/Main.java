@@ -1,7 +1,6 @@
 package me.braekpo1nt.warderaessedai;
 
 import me.braekpo1nt.warderaessedai.commands.WBCommandManager;
-import me.braekpo1nt.warderaessedai.commands.subcommands.BondSubCommand;
 import me.braekpo1nt.warderaessedai.listeners.AesSedaiListener;
 import me.braekpo1nt.warderaessedai.listeners.WarderListener;
 import org.bukkit.Bukkit;
@@ -28,6 +27,9 @@ public final class Main extends JavaPlugin {
         }
         
         new WBCommandManager(this);
+        
+        new AesSedaiListener(this);
+        new WarderListener(this);
     }
     
     
