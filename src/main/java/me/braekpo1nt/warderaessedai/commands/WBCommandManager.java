@@ -4,10 +4,10 @@ import me.braekpo1nt.warderaessedai.Main;
 import me.braekpo1nt.warderaessedai.commands.interfaces.CommandManager;
 import me.braekpo1nt.warderaessedai.commands.interfaces.SubCommand;
 import me.braekpo1nt.warderaessedai.commands.interfaces.SubTabCommand;
-import me.braekpo1nt.warderaessedai.commands.subcommands.AddAesSedaiSubCommand;
-import me.braekpo1nt.warderaessedai.commands.subcommands.AddWarderSubCommand;
+import me.braekpo1nt.warderaessedai.commands.subcommands.aessedai.AddAesSedaiSubCommand;
+import me.braekpo1nt.warderaessedai.commands.subcommands.warder.AddWarderSubCommand;
 import me.braekpo1nt.warderaessedai.commands.subcommands.BondSubCommand;
-import org.bukkit.Bukkit;
+import me.braekpo1nt.warderaessedai.commands.subcommands.warder.RemoveWarderSubCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -26,6 +26,7 @@ public class WBCommandManager implements CommandManager {
         subCommands.put("bond", new BondSubCommand(plugin));
         subCommands.put("addaessedai", new AddAesSedaiSubCommand(plugin));
         subCommands.put("addwarder", new AddWarderSubCommand(plugin));
+        subCommands.put("removewarder", new RemoveWarderSubCommand(plugin));
         subCommands.put("list", new SubCommand() {
             @Override
             public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

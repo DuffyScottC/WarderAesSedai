@@ -1,4 +1,4 @@
-package me.braekpo1nt.warderaessedai.commands.subcommands;
+package me.braekpo1nt.warderaessedai.commands.subcommands.aessedai;
 
 import me.braekpo1nt.warderaessedai.Main;
 import me.braekpo1nt.warderaessedai.commands.interfaces.SubCommand;

@@ -1,7 +1,6 @@
 package me.braekpo1nt.warderaessedai.listeners;
 
 import me.braekpo1nt.warderaessedai.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -30,13 +29,13 @@ public class WarderListener implements Listener {
             event.setCancelled(true);
         }
     }
-
+    
     /**
      * If a player logs in and matches the warder, set the warder to them
      * @param event
      */
     @EventHandler
-    public void warderLogOn(PlayerJoinEvent event) {
+    public void warderJoin(PlayerJoinEvent event) {
         String warderName = plugin.getConfig().getString(Main.WARDER_NAME);
         if (warderName != null && event.getPlayer().getName().equals(warderName)) {
             plugin.setWarder(event.getPlayer());
