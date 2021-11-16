@@ -7,6 +7,7 @@ import me.braekpo1nt.warderaessedai.commands.interfaces.SubTabCommand;
 import me.braekpo1nt.warderaessedai.commands.subcommands.AddAesSedaiSubCommand;
 import me.braekpo1nt.warderaessedai.commands.subcommands.AddWarderSubCommand;
 import me.braekpo1nt.warderaessedai.commands.subcommands.BondSubCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
@@ -25,6 +26,14 @@ public class WBCommandManager implements CommandManager {
         subCommands.put("bond", new BondSubCommand(plugin));
         subCommands.put("addaessedai", new AddAesSedaiSubCommand(plugin));
         subCommands.put("addwarder", new AddWarderSubCommand(plugin));
+        subCommands.put("list", new SubCommand() {
+            @Override
+            public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+                if (plugin.getWarder() != null)
+                sender.sendMessage("Warder: " + plugin.getWarder().getName());
+                return true;
+            }
+        });
     }
     
     /**

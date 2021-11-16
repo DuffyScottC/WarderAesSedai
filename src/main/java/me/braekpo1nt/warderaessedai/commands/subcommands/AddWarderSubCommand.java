@@ -32,6 +32,8 @@ public class AddWarderSubCommand implements SubCommand {
         }
         
         plugin.setWarder(warder);
+        plugin.getConfig().set(Main.WARDER_NAME, warder.getName());
+        plugin.saveConfig();
         
         sender.sendMessage(args[0] + " is now a warder.");
         
