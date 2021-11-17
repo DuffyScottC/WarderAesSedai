@@ -26,8 +26,18 @@ public class AesSedaiListener implements Listener {
     
     @EventHandler
     public void onAesSedaiRegainHealth(EntityRegainHealthEvent event) {
-        if (plugin.getAesSedai().equals(event.getEntity())) {
-            event.setCancelled(true);
+        Player warder = plugin.getWarder();
+        Player aesSedai = plugin.getAesSedai();
+        if (warder == null || aesSedai == null) {
+            return;
+        }
+        if (event.getEntity().equals(aesSedai)) {
+            /* if the warder is less than full health, then the aes sedai
+             * shouldn't heal normally, because the warder is giving health.*/
+            if (warder.getHealth() < 20) {
+                event.setCancelled(true);
+            }
+            //if the warder is at full health, you can heal normally
         }
     }
 }

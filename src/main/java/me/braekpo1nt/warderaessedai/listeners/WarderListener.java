@@ -47,16 +47,25 @@ public class WarderListener implements Listener {
     @EventHandler
     public void onWarderRegainHealth(EntityRegainHealthEvent event) {
         Player warder = plugin.getWarder();
-        if (warder == null) {
+        Player aesSedai = plugin.getAesSedai();
+        if (warder == null || aesSedai == null) {
             return;
         }
-        if (warder.equals(event.getEntity())) {
-            if (warder.getHealth() >= 10) {
-                Player aesSedai = plugin.getAesSedai();
+        if (event.getEntity().equals(warder)) {
+            EntityRegainHealthEvent.RegainReason reason = event.getRegainReason();
+            if (reason == EntityRegainHealthEvent.RegainReason.EATING 
+                    || reason == EntityRegainHealthEvent.RegainReason.SATIATED
+                    || reason == EntityRegainHealthEvent.RegainReason.EATING
+                    || reason == EntityRegainHealthEvent.RegainReason.MAGIC
+                    || reason == EntityRegainHealthEvent.RegainReason.MAGIC_REGEN
+            ) {
                 if (aesSedai.getHealth() < 20) {
-                    aesSedai.setHealth(aesSedai.getHealth() + event.getAmount());
-                    event.setCancelled(true);
+                    if (warder.getHealth() >= 10) {
+                        aesSedai.setHealth(aesSedai.getHealth() + event.getAmount());
+                        event.setCancelled(true);
+                    }
                 }
+                //if the aes sedai is at full health proceed as normal
             }
         }
     }
