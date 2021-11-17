@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public final class Main extends JavaPlugin {
     
     public static final String WARDER_NAME = "warder";
+    public static final String AES_SEDAI_NAME = "aes_sedai";
     
     private Player warder;
     private Player aesSedai;
@@ -27,6 +28,13 @@ public final class Main extends JavaPlugin {
                 setWarder(warderPlayer);
             }
         }
+        String aesSedaiName = this.getConfig().getString(Main.AES_SEDAI_NAME);
+        if (aesSedaiName != null) {
+            Player aesSedaiPlayer = Bukkit.getServer().getPlayerExact(aesSedaiName);
+            if (aesSedaiPlayer != null) {
+                setAesSedai(aesSedaiPlayer);
+            }
+        }
         
         new WBCommandManager(this);
         
@@ -36,27 +44,31 @@ public final class Main extends JavaPlugin {
     
     
     public Player getWarder() {
-        return warder;
+        return this.warder;
     }
     
     public void removeWarder() {
-        this.warder.removePotionEffect(PotionEffectType.REGENERATION);
+//        this.warder.removePotionEffect(PotionEffectType.REGENERATION);
         this.warder.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
         this.warder = null;
     }
     
     public void setWarder(Player warder) {
         this.warder = warder;
-        this.warder.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200000, 0, false, false));
+//        this.warder.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200000, 0, false, false));
         this.warder.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200000, 0, false, false));
     }
     
     public Player getAesSedai() {
-        return aesSedai;
+        return this.aesSedai;
     }
     
     public void setAesSedai(Player aesSedai) {
         this.aesSedai = aesSedai;
+    }
+    
+    public void removeAesSedai() {
+        this.aesSedai = null;
     }
     
     

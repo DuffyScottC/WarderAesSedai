@@ -1,12 +1,12 @@
 package me.braekpo1nt.warderaessedai.listeners;
 
 import me.braekpo1nt.warderaessedai.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class AesSedaiListener implements Listener {
 
@@ -19,8 +19,24 @@ public class AesSedaiListener implements Listener {
     
     @EventHandler
     public void onPlayerDamageEntity(EntityDamageByEntityEvent event) {
-        if (event.getDamager().equals(plugin.getAesSedai())) {
+        Player aesSedai = plugin.getAesSedai();
+        if (aesSedai == null) {
+            return;
+        }
+        if (event.getDamager().equals(aesSedai)) {
             event.setCancelled(true);
+        }
+    }
+
+    /**
+     * If a player logs in and matches the warder, set the warder to them
+     * @param event
+     */
+    @EventHandler
+    public void aesSedaiJoin(PlayerJoinEvent event) {
+        String aesSedaiName = plugin.getConfig().getString(Main.AES_SEDAI_NAME);
+        if (aesSedaiName != null && event.getPlayer().getName().equals(aesSedaiName)) {
+            plugin.setAesSedai(event.getPlayer());
         }
     }
     
