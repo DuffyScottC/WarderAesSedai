@@ -47,6 +47,9 @@ public class WarderListener implements Listener {
     @EventHandler
     public void onWarderRegainHealth(EntityRegainHealthEvent event) {
         Player warder = plugin.getWarder();
+        if (warder == null) {
+            return;
+        }
         if (warder.equals(event.getEntity())) {
             if (warder.getHealth() >= 10) {
                 Player aesSedai = plugin.getAesSedai();
