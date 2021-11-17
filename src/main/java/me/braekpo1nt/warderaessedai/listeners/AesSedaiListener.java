@@ -27,7 +27,6 @@ public class AesSedaiListener implements Listener {
     @EventHandler
     public void onAesSedaiRegainHealth(EntityRegainHealthEvent event) {
         if (plugin.getAesSedai().equals(event.getEntity())) {
-            Bukkit.getLogger().info("Cancelled healing");
             event.setCancelled(true);
         }
     }
