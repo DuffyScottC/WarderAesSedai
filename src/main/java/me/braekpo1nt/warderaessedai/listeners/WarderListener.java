@@ -52,20 +52,11 @@ public class WarderListener implements Listener {
             return;
         }
         if (event.getEntity().equals(warder)) {
-            EntityRegainHealthEvent.RegainReason reason = event.getRegainReason();
-            if (reason == EntityRegainHealthEvent.RegainReason.EATING 
-                    || reason == EntityRegainHealthEvent.RegainReason.SATIATED
-                    || reason == EntityRegainHealthEvent.RegainReason.EATING
-                    || reason == EntityRegainHealthEvent.RegainReason.MAGIC
-                    || reason == EntityRegainHealthEvent.RegainReason.MAGIC_REGEN
-            ) {
+            if (warder.getHealth() >= 10) {
                 if (aesSedai.getHealth() < 20) {
-                    if (warder.getHealth() >= 10) {
-                        aesSedai.setHealth(aesSedai.getHealth() + event.getAmount());
-                        event.setCancelled(true);
-                    }
+                    aesSedai.setHealth(aesSedai.getHealth() + event.getAmount());
+                    event.setCancelled(true);
                 }
-                //if the aes sedai is at full health proceed as normal
             }
         }
     }
