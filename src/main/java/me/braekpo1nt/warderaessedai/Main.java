@@ -4,12 +4,17 @@ import me.braekpo1nt.warderaessedai.commands.WBCommandManager;
 import me.braekpo1nt.warderaessedai.listeners.AesSedaiListener;
 import me.braekpo1nt.warderaessedai.listeners.WarderListener;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Criterias;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
 public final class Main extends JavaPlugin {
     
@@ -44,6 +49,14 @@ public final class Main extends JavaPlugin {
         new WarderListener(this);
         
         cast();
+        
+        Scoreboard s = Bukkit.getScoreboardManager().getMainScoreboard();
+        Objective o = s.getObjective("showhealth");
+        if (o == null) {
+            o = s.registerNewObjective("showhealth", Criterias.HEALTH, ChatColor.RED + "❤");
+        }
+        o.setDisplayName(ChatColor.RED + "❤");
+        o.setDisplaySlot(DisplaySlot.BELOW_NAME);
     }
     
     public Player getWarder() {
