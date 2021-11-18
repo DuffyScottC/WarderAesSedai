@@ -48,15 +48,9 @@ public final class Main extends JavaPlugin {
         new AesSedaiListener(this);
         new WarderListener(this);
         
-        cast();
+        new HealthScoreboardManager();
         
-        Scoreboard s = Bukkit.getScoreboardManager().getMainScoreboard();
-        Objective o = s.getObjective("showhealth");
-        if (o == null) {
-            o = s.registerNewObjective("showhealth", Criterias.HEALTH, ChatColor.RED + "❤");
-        }
-        o.setDisplayName(ChatColor.RED + "❤");
-        o.setDisplaySlot(DisplaySlot.BELOW_NAME);
+        cast();
     }
     
     public Player getWarder() {
