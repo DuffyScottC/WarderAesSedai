@@ -51,7 +51,7 @@ public class AesSedaiSubCommand implements SubTabCommand {
             }
             
             String aesSedaiName = plugin.getAesSedai().getName();
-            plugin.removeAesSedai();
+            plugin.setAesSedai(null);
             plugin.getConfig().set(Main.AES_SEDAI_NAME, null);
             plugin.saveConfig();
             

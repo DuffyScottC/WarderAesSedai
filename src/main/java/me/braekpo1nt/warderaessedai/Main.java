@@ -1,13 +1,12 @@
 package me.braekpo1nt.warderaessedai;
 
 import me.braekpo1nt.warderaessedai.commands.WBCommandManager;
+import me.braekpo1nt.warderaessedai.commands.WarderManager;
 import me.braekpo1nt.warderaessedai.listeners.AesSedaiListener;
 import me.braekpo1nt.warderaessedai.listeners.WarderListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public final class Main extends JavaPlugin {
     
@@ -40,6 +39,8 @@ public final class Main extends JavaPlugin {
         
         new AesSedaiListener(this);
         new WarderListener(this);
+        
+        new WarderManager(this);
     }
     
     public Player getWarder() {
@@ -48,7 +49,6 @@ public final class Main extends JavaPlugin {
     
     public void setWarder(Player warder) {
         this.warder = warder;
-        this.warder.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200000, 0, false, false));
     }
     
     public Player getAesSedai() {
