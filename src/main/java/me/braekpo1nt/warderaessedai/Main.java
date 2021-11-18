@@ -21,9 +21,6 @@ public final class Main extends JavaPlugin {
     private Player warder;
     private Player aesSedai;
     
-    private ItemStack warderCompass;
-    private ItemStack aesSedaiCompass;
-    
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
@@ -86,24 +83,9 @@ public final class Main extends JavaPlugin {
                 if (warder == null || aesSedai == null) {
                     return;
                 }
-                
-                if (warderCompass == null) {
-                    giveWarderCompass();
-                }
-                
-                if (aesSedaiCompass == null) {
-                    giveAesSedaiCompass();
-                }
-                
-                CompassMeta warderCompassMeta = (CompassMeta) warderCompass.getItemMeta();
-                CompassMeta aesSedaiCompassMeta = (CompassMeta) aesSedaiCompass.getItemMeta();
-                
-                warderCompassMeta.setLodestone(aesSedai.getLocation());
-                aesSedaiCompassMeta.setLodestone(warder.getLocation());
-                
-                warderCompass.setItemMeta(warderCompassMeta);
-                aesSedaiCompass.setItemMeta(aesSedaiCompassMeta);
-                
+                Bukkit.getLogger().info("setting compass");
+                warder.setCompassTarget(aesSedai.getLocation());
+                aesSedai.setCompassTarget(warder.getLocation());
             }
         }, 0, 1);
     }
@@ -113,14 +95,10 @@ public final class Main extends JavaPlugin {
             return;
         }
         warder.getInventory().remove(Material.COMPASS);
-        warderCompass = new ItemStack(Material.COMPASS);
-        CompassMeta warderCompassMeta = (CompassMeta) warderCompass.getItemMeta();
-        warderCompassMeta.setLodestoneTracked(false);
+        warder.getInventory().addItem(new ItemStack(Material.COMPASS));
         if (aesSedai != null) {
-            warderCompassMeta.setLodestone(aesSedai.getLocation());
+            warder.setCompassTarget(aesSedai.getLocation());
         }
-        warder.getInventory().addItem(warderCompass);
-        warderCompass.setItemMeta(warderCompassMeta);
     }
     
     public void giveAesSedaiCompass() {
@@ -128,14 +106,10 @@ public final class Main extends JavaPlugin {
             return;
         }
         aesSedai.getInventory().remove(Material.COMPASS);
-        aesSedaiCompass = new ItemStack(Material.COMPASS);
-        CompassMeta aesSedaiCompassMeta = (CompassMeta) aesSedaiCompass.getItemMeta();
-        aesSedaiCompassMeta.setLodestoneTracked(false);
+        aesSedai.getInventory().addItem(new ItemStack(Material.COMPASS));
         if (warder != null) {
-            aesSedaiCompassMeta.setLodestone(warder.getLocation());
+            aesSedai.setCompassTarget(warder.getLocation());
         }
-        aesSedai.getInventory().addItem(aesSedaiCompass);
-        aesSedaiCompass.setItemMeta(aesSedaiCompassMeta);
     }
     
     @Override
