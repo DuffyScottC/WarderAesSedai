@@ -42,20 +42,12 @@ public final class Main extends JavaPlugin {
         new WarderListener(this);
     }
     
-    
     public Player getWarder() {
         return this.warder;
     }
     
-    public void removeWarder() {
-//        this.warder.removePotionEffect(PotionEffectType.REGENERATION);
-        this.warder.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-        this.warder = null;
-    }
-    
     public void setWarder(Player warder) {
         this.warder = warder;
-//        this.warder.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200000, 0, false, false));
         this.warder.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200000, 0, false, false));
     }
     
@@ -66,11 +58,6 @@ public final class Main extends JavaPlugin {
     public void setAesSedai(Player aesSedai) {
         this.aesSedai = aesSedai;
     }
-    
-    public void removeAesSedai() {
-        this.aesSedai = null;
-    }
-    
     
     @Override
     public void onDisable() {
