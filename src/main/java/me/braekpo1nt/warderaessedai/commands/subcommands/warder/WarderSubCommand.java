@@ -51,9 +51,9 @@ public class WarderSubCommand implements SubTabCommand {
                 sender.sendMessage("A warder was not set.");
                 return false;
             }
-
+            
             String warderName = plugin.getWarder().getName();
-            plugin.removeWarder();
+            plugin.setWarder(null);
             plugin.getConfig().set(Main.WARDER_NAME, null);
             plugin.saveConfig();
 

@@ -8,6 +8,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class WarderListener implements Listener {
     
@@ -63,6 +64,14 @@ public class WarderListener implements Listener {
                     event.setCancelled(true);
                 }
             }
+        }
+    }
+    
+    @EventHandler
+    public void onWarderDeath(PlayerRespawnEvent event) {
+        Player warder = plugin.getWarder();
+        if (warder != null && event.getPlayer().equals(warder)) {
+            plugin.giveWarderCompass();
         }
     }
     
