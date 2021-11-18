@@ -1,14 +1,19 @@
 package me.braekpo1nt.warderaessedai.listeners;
 
 import me.braekpo1nt.warderaessedai.Main;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Iterator;
 
 public class WarderListener implements Listener {
     
@@ -68,10 +73,23 @@ public class WarderListener implements Listener {
     }
     
     @EventHandler
-    public void onWarderDeath(PlayerRespawnEvent event) {
+    public void onWarderRespawn(PlayerRespawnEvent event) {
         Player warder = plugin.getWarder();
         if (warder != null && event.getPlayer().equals(warder)) {
             plugin.giveWarderCompass();
+        }
+    }
+
+    @EventHandler
+    public void onAesSedaiDeath(PlayerDeathEvent event) {
+        Player warder = plugin.getWarder();
+        if (warder != null && event.getEntity().equals(warder)) {
+            Iterator<ItemStack> iterator = event.getDrops().iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next().getType().equals(Material.COMPASS)) {
+                    iterator.remove();
+                }
+            }
         }
     }
     

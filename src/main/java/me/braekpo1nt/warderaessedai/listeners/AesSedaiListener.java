@@ -1,13 +1,19 @@
 package me.braekpo1nt.warderaessedai.listeners;
 
 import me.braekpo1nt.warderaessedai.Main;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class AesSedaiListener implements Listener {
 
@@ -60,6 +66,19 @@ public class AesSedaiListener implements Listener {
         Player aesSedai = plugin.getAesSedai();
         if (aesSedai != null && event.getPlayer().equals(aesSedai)) {
             plugin.giveAesSedaiCompass();
+        }
+    }
+    
+    @EventHandler
+    public void onAesSedaiDeath(PlayerDeathEvent event) {
+        Player aesSedai = plugin.getAesSedai();
+        if (aesSedai != null && event.getEntity().equals(aesSedai)) {
+            Iterator<ItemStack> iterator = event.getDrops().iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next().getType().equals(Material.COMPASS)) {
+                    iterator.remove();
+                }
+            }
         }
     }
 }

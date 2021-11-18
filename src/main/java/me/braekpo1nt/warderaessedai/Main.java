@@ -1,14 +1,12 @@
 package me.braekpo1nt.warderaessedai;
 
 import me.braekpo1nt.warderaessedai.commands.WBCommandManager;
-import me.braekpo1nt.warderaessedai.commands.WarderManager;
 import me.braekpo1nt.warderaessedai.listeners.AesSedaiListener;
 import me.braekpo1nt.warderaessedai.listeners.WarderListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -45,7 +43,7 @@ public final class Main extends JavaPlugin {
         new AesSedaiListener(this);
         new WarderListener(this);
         
-        new WarderManager(this);
+        cast();
     }
     
     public Player getWarder() {
@@ -83,7 +81,7 @@ public final class Main extends JavaPlugin {
                 if (warder == null || aesSedai == null) {
                     return;
                 }
-                Bukkit.getLogger().info("setting compass");
+                
                 warder.setCompassTarget(aesSedai.getLocation());
                 aesSedai.setCompassTarget(warder.getLocation());
             }
