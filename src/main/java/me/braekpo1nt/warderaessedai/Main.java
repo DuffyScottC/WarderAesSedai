@@ -4,13 +4,17 @@ import me.braekpo1nt.warderaessedai.commands.WBCommandManager;
 import me.braekpo1nt.warderaessedai.listeners.AesSedaiListener;
 import me.braekpo1nt.warderaessedai.listeners.WarderListener;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Criterias;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
 public final class Main extends JavaPlugin {
     
@@ -19,9 +23,6 @@ public final class Main extends JavaPlugin {
     
     private Player warder;
     private Player aesSedai;
-    
-    private ItemStack warderCompass;
-    private ItemStack aesSedaiCompass;
     
     @Override
     public void onEnable() {
@@ -48,6 +49,14 @@ public final class Main extends JavaPlugin {
         new WarderListener(this);
         
         cast();
+        
+        Scoreboard s = Bukkit.getScoreboardManager().getMainScoreboard();
+        Objective o = s.getObjective("showhealth");
+        if (o == null) {
+            o = s.registerNewObjective("showhealth", Criterias.HEALTH, ChatColor.RED + "❤");
+        }
+        o.setDisplayName(ChatColor.RED + "❤");
+        o.setDisplaySlot(DisplaySlot.BELOW_NAME);
     }
     
     public Player getWarder() {
@@ -87,23 +96,8 @@ public final class Main extends JavaPlugin {
                     return;
                 }
                 
-                if (warderCompass == null) {
-                    giveWarderCompass();
-                }
-                
-                if (aesSedaiCompass == null) {
-                    giveAesSedaiCompass();
-                }
-                
-                CompassMeta warderCompassMeta = (CompassMeta) warderCompass.getItemMeta();
-                CompassMeta aesSedaiCompassMeta = (CompassMeta) aesSedaiCompass.getItemMeta();
-                
-                warderCompassMeta.setLodestone(aesSedai.getLocation());
-                aesSedaiCompassMeta.setLodestone(warder.getLocation());
-                
-                warderCompass.setItemMeta(warderCompassMeta);
-                aesSedaiCompass.setItemMeta(aesSedaiCompassMeta);
-                
+                warder.setCompassTarget(aesSedai.getLocation());
+                aesSedai.setCompassTarget(warder.getLocation());
             }
         }, 0, 20);
     }
@@ -113,14 +107,10 @@ public final class Main extends JavaPlugin {
             return;
         }
         warder.getInventory().remove(Material.COMPASS);
-        warderCompass = new ItemStack(Material.COMPASS);
-        CompassMeta warderCompassMeta = (CompassMeta) warderCompass.getItemMeta();
-        warderCompassMeta.setLodestoneTracked(false);
+        warder.getInventory().addItem(new ItemStack(Material.COMPASS));
         if (aesSedai != null) {
-            warderCompassMeta.setLodestone(aesSedai.getLocation());
+            warder.setCompassTarget(aesSedai.getLocation());
         }
-        warder.getInventory().addItem(warderCompass);
-        warderCompass.setItemMeta(warderCompassMeta);
     }
     
     public void giveAesSedaiCompass() {
@@ -128,14 +118,10 @@ public final class Main extends JavaPlugin {
             return;
         }
         aesSedai.getInventory().remove(Material.COMPASS);
-        aesSedaiCompass = new ItemStack(Material.COMPASS);
-        CompassMeta aesSedaiCompassMeta = (CompassMeta) aesSedaiCompass.getItemMeta();
-        aesSedaiCompassMeta.setLodestoneTracked(false);
+        aesSedai.getInventory().addItem(new ItemStack(Material.COMPASS));
         if (warder != null) {
-            aesSedaiCompassMeta.setLodestone(warder.getLocation());
+            aesSedai.setCompassTarget(warder.getLocation());
         }
-        aesSedai.getInventory().addItem(aesSedaiCompass);
-        aesSedaiCompass.setItemMeta(aesSedaiCompassMeta);
     }
     
     @Override
