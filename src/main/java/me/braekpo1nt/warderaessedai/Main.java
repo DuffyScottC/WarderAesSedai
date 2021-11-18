@@ -1,7 +1,6 @@
 package me.braekpo1nt.warderaessedai;
 
 import me.braekpo1nt.warderaessedai.commands.WBCommandManager;
-import me.braekpo1nt.warderaessedai.commands.WarderManager;
 import me.braekpo1nt.warderaessedai.listeners.AesSedaiListener;
 import me.braekpo1nt.warderaessedai.listeners.WarderListener;
 import org.bukkit.Bukkit;
@@ -48,7 +47,7 @@ public final class Main extends JavaPlugin {
         new AesSedaiListener(this);
         new WarderListener(this);
         
-        new WarderManager(this);
+        cast();
     }
     
     public Player getWarder() {
@@ -83,6 +82,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
+                Bukkit.getLogger().info("running scheduled task");
                 if (warder == null || aesSedai == null) {
                     return;
                 }
@@ -105,7 +105,7 @@ public final class Main extends JavaPlugin {
                 aesSedaiCompass.setItemMeta(aesSedaiCompassMeta);
                 
             }
-        }, 0, 1);
+        }, 0, 20);
     }
     
     public void giveWarderCompass() {
