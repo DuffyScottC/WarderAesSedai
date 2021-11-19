@@ -3,6 +3,7 @@ package me.braekpo1nt.warderaessedai.listeners;
 import me.braekpo1nt.warderaessedai.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -68,7 +69,9 @@ public class AesSedaiListener implements Listener {
             return;
         }
         if (event.getDamager().equals(aesSedai)) {
-            event.setCancelled(true);
+            if (!event.getEntity().getType().equals(EntityType.ENDER_DRAGON)) {
+                event.setCancelled(true);
+            }
         }
     }
     

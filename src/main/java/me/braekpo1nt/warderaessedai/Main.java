@@ -11,10 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.Criterias;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
 
 public final class Main extends JavaPlugin {
     
@@ -23,6 +19,7 @@ public final class Main extends JavaPlugin {
     
     private Player warder;
     private Player aesSedai;
+    private HealthScoreboardManager healthScoreboardManager;
     
     @Override
     public void onEnable() {
@@ -48,7 +45,7 @@ public final class Main extends JavaPlugin {
         new AesSedaiListener(this);
         new WarderListener(this);
         
-        new HealthScoreboardManager();
+        this.healthScoreboardManager = new HealthScoreboardManager(this);
         
         cast();
     }
@@ -85,7 +82,6 @@ public final class Main extends JavaPlugin {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
-                Bukkit.getLogger().info("running scheduled task");
                 if (warder == null || aesSedai == null) {
                     return;
                 }
@@ -94,6 +90,13 @@ public final class Main extends JavaPlugin {
                 aesSedai.setCompassTarget(warder.getLocation());
             }
         }, 0, 20);
+        
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                healthScoreboardManager.update();
+            }
+        }, 0, 1);
     }
     
     public void giveWarderCompass() {
